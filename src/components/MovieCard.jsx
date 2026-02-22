@@ -1,5 +1,5 @@
 function MovieCard({ movie }) {
-  function onFavourite() {
+  function onFavorite() {
     alert("Clicked");
   }
 
@@ -9,7 +9,7 @@ function MovieCard({ movie }) {
         <img src={movie.url} alt={movie.title} />
 
         <div className="movie-overlay">
-          <button className="favourite-btn" onClick={onFavourite}>
+          <button className="favorite-btn" onClick={onFavorite}>
             ❤️
           </button>
         </div>
