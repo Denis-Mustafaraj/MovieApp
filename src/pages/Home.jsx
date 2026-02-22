@@ -1,37 +1,45 @@
-import MovieCard from "../components/MovieCard"
+import { useState } from "react";
+import MovieCard from "../components/MovieCard";
 
-function Home(){
+function Home() {
+  const [searchQuery, setSearchQuery] = useState("");
 
-    const movies = [
-        {id: 1 , title: "Dune" , releaseDate: "1990"},
-        {id: 2 , title: "Dune part 2" , releaseDate: "1995"},
-        {id: 3 , title: "John Wick" , releaseDate: "2000"},
-    ]
+  const movies = [
+    { id: 1, title: "Dune", releaseDate: "1990" },
+    { id: 2, title: "Dune part 2", releaseDate: "1995" },
+    { id: 3, title: "John Wick", releaseDate: "2000" },
+  ];
 
-    const heandleSearch = () => {
+  const heandleSearch = () => {
+    alert(searchQuery);
+  };
 
-    }
+  return (
+    <div className="home">
+      <form onSubmit={heandleSearch} className="search-form">
+        <input
+          type="text"
+          placeholder="Search for movie..."
+          className="search-input"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
 
-    return (
-        <div className="home">
+        <button type="submit" className="search-button">
+          Search
+        </button>
+      </form>
 
-            <form onSubmit={heandleSearch} className="search-form">
-                <input 
-                    type="text" 
-                    placeholder="Search for movie..." 
-                    className="search-input"
-                />
-
-                <button type="submit" className="search-button">Search</button>
-            </form>
-
-            <div className="movies-grid">
-                {movies.map((movie) => (
-                    <MovieCard movie={movie} key={movie.id}/>
-                ))}
-            </div>
-        </div>
-    );
+      <div className="movies-grid">
+        {movies.map(
+          (movie) =>
+            movie.title.toLowerCase().startsWith(searchQuery) && (
+              <MovieCard movie={movie} key={movie.id} />
+            ),
+        )}
+      </div>
+    </div>
+  );
 }
 
-export default Home
+export default Home;
