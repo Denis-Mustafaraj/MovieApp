@@ -8,7 +8,11 @@
   align-items: center;
   gap: 1.5rem;
   border-bottom: 1px solid var(--border);
-  background: linear-gradient(120deg, rgba(17, 24, 39, 0.92), rgba(15, 23, 42, 0.7));
+  background: linear-gradient(
+    120deg,
+    rgba(17, 24, 39, 0.92),
+    rgba(15, 23, 42, 0.7)
+  );
   backdrop-filter: blur(14px);
 }
 
@@ -36,11 +40,12 @@
   padding: 0.45rem 0.9rem;
   border-radius: 999px;
   border: 1px solid transparent;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .nav-link:hover {
   border-color: rgba(96, 165, 250, 0.4);
   color: var(--primary);
 }
-

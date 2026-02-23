@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import MovieCard from "../components/MovieCard";
 import { searchMovies, getPopularMovies } from "../services/api";
-import "../css/Home.css"
+import "../css/Home.css";
 
 function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -15,13 +15,13 @@ function Home() {
         const popularMovies = await getPopularMovies();
         setMovies(popularMovies);
       } catch (err) {
-        console.log(err)
+        console.log(err);
         setError("Failed to load popular movies. Please try again later.");
       } finally {
         setLoading(false);
       }
-    }
-    
+    };
+
     loadPopularMovies();
   }, []);
 
@@ -36,10 +36,10 @@ function Home() {
       const searchResults = await searchMovies(searchQuery);
       setMovies(searchResults);
       setError(null);
-    }catch (err) {
-      console.log(err)
+    } catch (err) {
+      console.log(err);
       setError("Failed to search movies. Please try again later.");
-    }finally {
+    } finally {
       setLoading(false);
     }
   };
@@ -62,15 +62,15 @@ function Home() {
 
       {error && <div className="error-message">{error}</div>}
 
-      {loading ? <div className="loading">Loading...</div> : <div className="movies-grid">
-        {movies.map(
-          (movie) =>
-            (
-              <MovieCard movie={movie} key={movie.id} />
-            ),
-        )}
-      </div>}
-      
+      {loading ? (
+        <div className="loading">Loading...</div>
+      ) : (
+        <div className="movies-grid">
+          {movies.map((movie) => (
+            <MovieCard movie={movie} key={movie.id} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
