@@ -1,15 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MovieCard from "../components/MovieCard";
+import { searchMovies, getPopularMovies } from "../services/api";
 import "../css/Home.css"
 
 function Home() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [movies, setMovies] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const movies = [
-    { id: 1, title: "Dune", releaseDate: "1990" },
-    { id: 2, title: "Dune part 2", releaseDate: "1995" },
-    { id: 3, title: "John Wick", releaseDate: "2000" },
-  ];
+  useEffect(() => {
+    const loadPopularMovies = async () => {
+      try {
+        const popularMovies = await getPopularMovies();
+        setMovies(popularMovies);
+      } catch (err) {
+        console.log(err)
+        setError("Failed to load popular movies. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    loadPopularMovies();
+  }, []);
 
   const heandleSearch = () => {
     alert(searchQuery);
